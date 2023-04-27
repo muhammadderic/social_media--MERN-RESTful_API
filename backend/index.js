@@ -3,6 +3,10 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
+const authRouter = require("./routers/auth");
+const usersRouter = require("./routers/users");
+const postsRouter = require("./routers/posts");
+
 const app = express();
 dotenv.config();
 
@@ -10,9 +14,9 @@ dotenv.config();
 app.use(cors());
 app.use(express.json());
 
-app.use("/", (req, res) => {
-  res.send("Hello Deric");
-})
+app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/users", usersRouter);
+app.use("/api/v1/posts", postsRouter);
 
 // Listen
 app.listen(5000, () => {
@@ -20,5 +24,5 @@ app.listen(5000, () => {
 })
 
 // Connect to Database
-mongoose.connect(process.env.MONGO_URL)
-  .then(console.log("connected to database"));
+// mongoose.connect(process.env.MONGO_URL)
+//   .then(console.log("connected to database"));
