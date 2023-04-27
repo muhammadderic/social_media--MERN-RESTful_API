@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const mongoose = require("mongoose");
 
 const app = express();
 dotenv.config();
@@ -17,3 +18,7 @@ app.use("/", (req, res) => {
 app.listen(5000, () => {
   console.log("server is listening");
 })
+
+// Connect to Database
+mongoose.connect(process.env.MONGO_URL)
+  .then(console.log("connected to database"));
